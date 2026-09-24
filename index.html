@@ -1,0 +1,1394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<title>Kamdhenu Dairy & Cold Drinks</title>
+
+<style>
+:root{
+  --blue:#1565c0;
+  --sky:#4fc3f7;
+  --green:#43a047;
+  --dark:#123047;
+  --light:#f5fbff;
+  --gold:#d8a72c
+}
+
+*{
+  box-sizing:border-box
+}
+
+body{
+  margin:0;
+  font-family:Arial,sans-serif;
+  color:var(--dark);
+  background:var(--light)
+}
+
+header{
+  background:#fff;
+  position:sticky;
+  top:0;
+  z-index:10;
+  box-shadow:0 2px 12px #0001
+}
+
+.nav{
+  max-width:1100px;
+  margin:auto;
+  padding:14px 20px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  color:var(--blue);
+  font-size:18px
+}
+
+.cow{
+  font-size:32px
+}
+
+nav a{
+  margin-left:18px;
+  text-decoration:none;
+  color:var(--dark);
+  font-weight:600
+}
+
+.hero{
+  background:linear-gradient(135deg,#e9f9ff,#eaf8ed);
+  padding:70px 20px
+}
+
+.hero-inner{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1.3fr .7fr;
+  gap:35px;
+  align-items:center
+}
+
+.badge{
+  display:inline-block;
+  background:#fff;
+  padding:8px 14px;
+  border-radius:30px;
+  color:var(--green);
+  font-weight:700
+}
+
+h1{
+  font-size:48px;
+  line-height:1.05;
+  margin:18px 0 12px;
+  color:var(--blue)
+}
+
+.hero p{
+  font-size:19px;
+  line-height:1.6
+}
+
+.buttons{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap
+}
+
+.btn{
+  padding:13px 20px;
+  border-radius:10px;
+  border:0;
+  text-decoration:none;
+  font-weight:700;
+  cursor:pointer
+}
+
+.primary{
+  background:var(--blue);
+  color:#fff
+}
+
+.secondary{
+  background:#fff;
+  color:var(--blue);
+  border:1px solid #cde
+}
+
+.hero-card{
+  background:#fff;
+  border-radius:24px;
+  padding:30px;
+  text-align:center;
+  box-shadow:0 12px 35px #1565c022
+}
+
+.hero-card .big{
+  font-size:90px
+}
+
+section{
+  max-width:1100px;
+  margin:auto;
+  padding:60px 20px
+}
+
+h2{
+  text-align:center;
+  font-size:32px;
+  margin:0 0 10px;
+  color:var(--blue)
+}
+
+.sub{
+  text-align:center;
+  color:#667;
+  margin-bottom:30px
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px
+}
+
+.card{
+  background:#fff;
+  border-radius:16px;
+  padding:22px;
+  box-shadow:0 5px 18px #0000000b;
+  border:1px solid #e7f0f5
+}
+
+.icon{
+  font-size:36px
+}
+
+.card h3{
+  margin:10px 0 5px
+}
+
+.price{
+  font-size:25px;
+  font-weight:800;
+  color:var(--green);
+  margin-top:12px
+}
+
+.offer{
+  background:linear-gradient(135deg,var(--blue),#42a5f5);
+  color:#fff;
+  border-radius:20px;
+  padding:30px;
+  text-align:center
+}
+
+.offer h2{
+  color:#fff
+}
+
+.offer p{
+  font-size:18px
+}
+
+.contact{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px
+}
+
+.contact .card{
+  min-height:170px
+}
+
+.admin{
+  background:#102a3a;
+  color:#fff;
+  border-radius:20px;
+  padding:30px
+}
+
+.admin h2{
+  color:#fff
+}
+
+.admin-note{
+  color:#cce5f5
+}
+
+.admin-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px
+}
+
+.admin label{
+  font-size:13px;
+  color:#cce5f5
+}
+
+.admin input{
+  width:100%;
+  padding:11px;
+  border-radius:8px;
+  border:0;
+  margin-top:5px
+}
+
+.save{
+  margin-top:18px;
+  background:var(--green);
+  color:#fff
+}
+
+footer{
+  background:#0c2433;
+  color:#d9edf8;
+  text-align:center;
+  padding:30px 20px
+}
+
+@media(max-width:750px){
+
+  .hero-inner,
+  .contact{
+    grid-template-columns:1fr
+  }
+
+  .grid,
+  .admin-grid{
+    grid-template-columns:1fr 1fr
+  }
+
+  h1{
+    font-size:38px
+  }
+
+  nav{
+    display:none
+  }
+}
+
+@media(max-width:480px){
+
+  .grid,
+  .admin-grid{
+    grid-template-columns:1fr
+  }
+
+  .hero{
+    padding-top:45px
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="nav">
+
+<div class="logo">
+<span class="cow">🐄</span>
+
+<span>
+Kamdhenu Dairy<br>
+<small>& Cold Drinks</small>
+</span>
+
+</div>
+
+<nav>
+<a href="#products">Products</a>
+<a href="#offers">Offers</a>
+<a href="#about">About</a>
+<a href="#contact">Contact</a>
+</nav>
+
+</div>
+
+</header>
+
+
+<div class="hero">
+
+<div class="hero-inner">
+
+<div>
+
+<span class="badge">
+Fresh • Pure • Everyday
+</span>
+
+<h1>
+कामधेनू डेअरी<br>
+आणि कोल्ड्रिंक्स
+</h1>
+
+<p>
+Fresh dairy products and refreshing drinks for your family.
+Quality you can trust, every day.
+</p>
+
+<div class="buttons">
+
+<a class="btn primary" href="#products">
+View Prices
+</a>
+
+<a class="btn secondary" href="#contact">
+Contact Shop
+</a>
+
+</div>
+
+</div>
+
+
+<div class="hero-card">
+
+<div class="big">
+🥛
+</div>
+
+<h3>
+Fresh Milk Daily
+</h3>
+
+<p>
+Pure taste • Fresh supply • Friendly service
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+
+<section id="products">
+
+<h2>
+Our Products & Prices
+</h2>
+
+<p class="sub">
+Prices shown here can be changed from the admin section below.
+</p>
+
+<div class="grid" id="productGrid"></div>
+
+</section>
+
+
+<section id="offers">
+
+<div class="offer">
+
+<h2>
+Today's Special Offers
+</h2>
+
+<p>
+Check with the shop for today's fresh deals and combo offers.
+</p>
+
+<a class="btn secondary" href="#contact">
+Ask for Offers
+</a>
+
+</div>
+
+</section>
+
+
+<section id="about">
+
+<h2>
+About Kamdhenu Dairy
+</h2>
+
+<p class="sub">
+Your neighborhood destination for dairy products and cold drinks.
+</p>
+
+<div class="grid">
+
+<div class="card">
+
+<div class="icon">
+🥛
+</div>
+
+<h3>
+Fresh Dairy
+</h3>
+
+<p>
+Milk and everyday dairy essentials with a focus on freshness.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+🧃
+</div>
+
+<h3>
+Cold Drinks
+</h3>
+
+<p>
+A convenient selection of refreshing beverages.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<div class="icon">
+🤝
+</div>
+
+<h3>
+Trusted Service
+</h3>
+
+<p>
+Simple, friendly service for our local customers.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section>
+
+<div class="admin">
+
+<h2>
+🔐 Secure Shop Admin
+</h2>
+
+<p class="admin-note">
+Online admin dashboard. Supabase Auth protects this area and
+Supabase Database syncs products and shop information across devices.
+</p>
+
+
+<div id="loginBox">
+
+<div class="admin-grid">
+
+<div>
+
+<label>
+Admin email
+</label>
+
+<input
+id="adminEmail"
+type="email"
+autocomplete="username"
+placeholder="owner@example.com">
+
+</div>
+
+
+<div>
+
+<label>
+Password
+</label>
+
+<input
+id="adminPassword"
+type="password"
+autocomplete="current-password"
+placeholder="Your password">
+
+</div>
+
+</div>
+
+
+<button
+class="btn save"
+onclick="adminLogin()">
+
+Admin Login
+
+</button>
+
+<span
+id="loginMsg"
+style="margin-left:12px">
+</span>
+
+</div>
+
+
+<div
+id="dashboard"
+style="display:none">
+
+<p id="adminUser"></p>
+
+
+<h3>
+Products
+</h3>
+
+<div
+class="admin-grid"
+id="adminGrid">
+</div>
+
+
+<div class="buttons">
+
+<button
+class="btn save"
+onclick="savePrices()">
+
+Save Changes
+
+</button>
+
+
+<button
+class="btn secondary"
+onclick="addProduct()">
+
++ Add Product
+
+</button>
+
+
+<button
+class="btn secondary"
+onclick="adminLogout()">
+
+Logout
+
+</button>
+
+</div>
+
+
+<h3 style="margin-top:25px">
+Shop Information
+</h3>
+
+
+<div class="admin-grid">
+
+<div>
+
+<label>
+Address
+</label>
+
+<input id="shopAddress">
+
+</div>
+
+
+<div>
+
+<label>
+Contact number
+</label>
+
+<input id="shopPhone">
+
+</div>
+
+
+<div>
+
+<label>
+WhatsApp number
+</label>
+
+<input id="shopWhatsapp">
+
+</div>
+
+</div>
+
+
+<button
+class="btn save"
+onclick="saveShopInfo()">
+
+Save Shop Information
+
+</button>
+
+<span
+id="saved"
+style="margin-left:12px">
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+
+<section id="contact">
+
+<h2>
+Visit / Contact Us
+</h2>
+
+<div class="contact">
+
+
+<div class="card">
+
+<h3>
+📍 Shop Address
+</h3>
+
+<p id="publicAddress">
+Kamdhenu Dairy and Cold Drinks<br>
+Address can be updated from Admin.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h3>
+📞 Call / WhatsApp
+</h3>
+
+<p id="publicPhone">
+Phone number can be updated from Admin.
+</p>
+
+
+<div class="buttons">
+
+<a
+id="callLink"
+class="btn primary"
+href="tel:+910000000000">
+
+Call Now
+
+</a>
+
+
+<a
+id="whatsappLink"
+class="btn secondary"
+href="https://wa.me/910000000000">
+
+WhatsApp
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+<footer>
+
+© 2026 Kamdhenu Dairy and Cold Drinks
+• Freshness you can trust
+
+</footer>
+
+
+<script>
+
+// ========================================
+// SUPABASE CONNECTION
+// ========================================
+
+const SUPABASE_URL =
+"https://flldakaurrhmyymhqgck.supabase.co";
+
+const SUPABASE_ANON_KEY =
+"sb_publishable_yT0_QDevaVUI5Ce6ij3tVw_uNcqgcmZ";
+
+const sb =
+supabase.createClient(
+SUPABASE_URL,
+SUPABASE_ANON_KEY
+);
+
+
+// ========================================
+// WEBSITE DATA
+// ========================================
+
+let products = [];
+
+let shopInfo = {
+
+address:
+"Kamdhenu Dairy and Cold Drinks, Your Address",
+
+phone:
+"+91 00000 00000",
+
+whatsapp:
+"910000000000"
+
+};
+
+
+// Your Supabase Auth admin user's UUID
+const ADMIN_USER_ID =
+"94cc76d0-c4db-4cab-acff-bed2d4172e3c";
+
+
+// Default products shown if database is empty
+const defaults = [
+
+["🥛","Fresh Milk","₹60 / 1 L"],
+
+["🥣","Curd","₹50 / 500 g"],
+
+["🧈","Butter","₹60 / pack"],
+
+["🧀","Paneer","₹90 / 250 g"],
+
+["🥛","Buttermilk","₹20 / 500 ml"],
+
+["🧃","Lassi","₹30 / 250 ml"],
+
+["🥤","Cold Drinks","₹40 / bottle"],
+
+["🍨","Ice Cream","₹50 / cup"],
+
+["🍶","Flavoured Milk","₹30 / bottle"]
+
+];
+
+
+// ========================================
+// RENDER WEBSITE
+// ========================================
+
+function render(){
+
+productGrid.innerHTML =
+products.map((p,i)=>`
+
+<div class="card">
+
+<div class="icon">
+${p[0]}
+</div>
+
+<h3>
+${p[1]}
+</h3>
+
+<div class="price">
+${p[2]}
+</div>
+
+</div>
+
+`).join("");
+
+
+adminGrid.innerHTML =
+products.map((p,i)=>`
+
+<div>
+
+<label>
+${p[1]}
+</label>
+
+<input
+id="price${i}"
+value="${p[2]}">
+
+<button
+class="btn secondary"
+style="margin-top:5px"
+onclick="removeProduct(${i})">
+
+Remove
+
+</button>
+
+</div>
+
+`).join("");
+
+
+document.getElementById(
+"publicAddress"
+).innerHTML =
+shopInfo.address;
+
+
+document.getElementById(
+"publicPhone"
+).textContent =
+shopInfo.phone;
+
+
+document.getElementById(
+"callLink"
+).href =
+"tel:" +
+shopInfo.phone.replace(
+/[^0-9+]/g,
+""
+);
+
+
+document.getElementById(
+"whatsappLink"
+).href =
+"https://wa.me/" +
+shopInfo.whatsapp.replace(
+/[^0-9]/g,
+""
+);
+
+}
+
+
+// ========================================
+// LOAD PRODUCTS + SHOP INFORMATION
+// ========================================
+
+async function loadData(){
+
+const {
+data:ps,
+error:pe
+} =
+await sb
+.from("products")
+.select(
+"id,icon,name,price,sort_order,active"
+)
+.eq("active",true)
+.order("sort_order");
+
+
+if(!pe && ps?.length){
+
+products = ps;
+
+}else{
+
+products =
+defaults.map((p,i)=>({
+
+id:null,
+
+icon:p[0],
+
+name:p[1],
+
+price:p[2],
+
+sort_order:i,
+
+active:true
+
+}));
+
+}
+
+
+const {
+data:si
+} =
+await sb
+.from("shop_settings")
+.select(
+"address,phone,whatsapp"
+)
+.eq("id",1)
+.maybeSingle();
+
+
+if(si){
+
+shopInfo = si;
+
+}
+
+
+render();
+
+}
+
+
+// ========================================
+// ADMIN LOGIN
+// ========================================
+
+async function adminLogin(){
+
+const e =
+document
+.getElementById("adminEmail")
+.value
+.trim();
+
+const p =
+document
+.getElementById("adminPassword")
+.value;
+
+
+if(!e || !p){
+
+loginMsg.textContent =
+"Enter email and password.";
+
+return;
+
+}
+
+
+const {
+data,
+error
+} =
+await sb.auth.signInWithPassword({
+
+email:e,
+
+password:p
+
+});
+
+
+if(error){
+
+loginMsg.textContent =
+error.message;
+
+return;
+
+}
+
+
+// Only the authorized Supabase user
+// can access the admin dashboard.
+
+if(
+data.user?.id !==
+ADMIN_USER_ID
+){
+
+await sb.auth.signOut();
+
+loginMsg.textContent =
+"This account is not authorized as admin.";
+
+return;
+
+}
+
+
+showDashboard();
+
+}
+
+
+// ========================================
+// SHOW ADMIN DASHBOARD
+// ========================================
+
+async function showDashboard(){
+
+const {
+data:{
+user
+}
+} =
+await sb.auth.getUser();
+
+
+if(
+!user ||
+user.id !== ADMIN_USER_ID
+){
+
+if(user){
+
+await sb.auth.signOut();
+
+}
+
+return;
+
+}
+
+
+loginBox.style.display =
+"none";
+
+dashboard.style.display =
+"block";
+
+
+adminUser.textContent =
+"Signed in as " +
+user.email;
+
+
+shopAddress.value =
+shopInfo.address;
+
+shopPhone.value =
+shopInfo.phone;
+
+shopWhatsapp.value =
+shopInfo.whatsapp;
+
+}
+
+
+// ========================================
+// LOGOUT
+// ========================================
+
+async function adminLogout(){
+
+await sb.auth.signOut();
+
+dashboard.style.display =
+"none";
+
+loginBox.style.display =
+"block";
+
+}
+
+
+// ========================================
+// ADD PRODUCT
+// ========================================
+
+async function addProduct(){
+
+const name =
+prompt(
+"Product name:"
+);
+
+
+if(!name){
+
+return;
+
+}
+
+
+const price =
+prompt(
+"Price (example: ₹60 / 1 L):",
+"₹0"
+);
+
+
+if(!price){
+
+return;
+
+}
+
+
+const {
+error
+} =
+await sb
+.from("products")
+.insert({
+
+icon:"🥛",
+
+name:name,
+
+price:price,
+
+sort_order:
+products.length,
+
+active:true
+
+});
+
+
+if(error){
+
+alert(
+error.message
+);
+
+}else{
+
+await loadData();
+
+}
+
+}
+
+
+// ========================================
+// REMOVE PRODUCT
+// ========================================
+
+async function removeProduct(i){
+
+if(
+!confirm(
+"Remove this product?"
+)
+){
+
+return;
+
+}
+
+
+const p =
+products[i];
+
+
+if(p.id){
+
+const {
+error
+} =
+await sb
+.from("products")
+.update({
+active:false
+})
+.eq(
+"id",
+p.id
+);
+
+
+if(error){
+
+alert(
+error.message
+);
+
+return;
+
+}
+
+}
+
+
+products.splice(
+i,
+1
+);
+
+
+render();
+
+}
+
+
+// ========================================
+// SAVE PRODUCT PRICES
+// ========================================
+
+async function savePrices(){
+
+for(
+let i=0;
+i<products.length;
+i++
+){
+
+const p =
+products[i];
+
+const price =
+document
+.getElementById(
+"price"+i
+)
+.value;
+
+
+if(p.id){
+
+await sb
+.from("products")
+.update({
+price:price
+})
+.eq(
+"id",
+p.id
+);
+
+}
+
+}
+
+
+await loadData();
+
+
+saved.textContent =
+"✓ Prices synced online";
+
+
+setTimeout(
+()=>{
+saved.textContent="";
+},
+2500
+);
+
+}
+
+
+// ========================================
+// SAVE SHOP INFORMATION
+// ========================================
+
+async function saveShopInfo(){
+
+shopInfo = {
+
+id:1,
+
+address:
+shopAddress.value,
+
+phone:
+shopPhone.value,
+
+whatsapp:
+shopWhatsapp.value
+
+};
+
+
+const {
+error
+} =
+await sb
+.from("shop_settings")
+.upsert(
+shopInfo
+);
+
+
+if(error){
+
+saved.textContent =
+error.message;
+
+return;
+
+}
+
+
+render();
+
+
+saved.textContent =
+"✓ Shop information synced online";
+
+
+setTimeout(
+()=>{
+saved.textContent="";
+},
+2500
+);
+
+}
+
+
+// ========================================
+// SUPABASE AUTH STATE
+// ========================================
+
+sb.auth.onAuthStateChange(
+(_event,session)=>{
+
+if(session){
+
+showDashboard();
+
+}
+
+});
+
+
+// ========================================
+// INITIAL LOAD
+// ========================================
+
+loadData()
+.then(
+async()=>{
+
+const {
+data:{
+session
+}
+} =
+await sb.auth.getSession();
+
+
+if(session){
+
+showDashboard();
+
+}
+
+}
+);
+
+</script>
+
+</body>
+</html>
