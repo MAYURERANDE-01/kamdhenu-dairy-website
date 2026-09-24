@@ -1191,54 +1191,7 @@ render();
 // SAVE PRODUCT PRICES
 // ========================================
 
-async function savePrices(){
-
-for(
-let i=0;
-i<products.length;
-i++
-){
-
-const p =
-products[i];
-
-const price =
-document
-.getElementById(
-"price"+i
-)
-.value;
-
-
-if(p.id){
-
-await sb
-.from("products")
-.update({
-price:price
-})
-.eq(
-"id",
-p.id
-);
-
-}
-
-}
-
-
-await loadData();
-
-
-saved.textContent =
-"✓ Prices synced online";
-
-
-setTimeout(
-()=>{
-saved.textContent="";
-},
-2500
+async function savePrices(){for(let i=0;i<products.length;i++){const p=products[i],price=document.getElementById("price"+i).value;if(p.id){const {error}=await sb.from("products").update({price}).eq("id",p.id);if(error){saved.textContent=error.message;return}}}await loadData();saved.textContent="✓ Prices synced online";setTimeout(()=>saved.textContent="",2500);}
 );
 
 }
