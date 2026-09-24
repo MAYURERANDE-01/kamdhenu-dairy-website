@@ -803,54 +803,10 @@ const defaults = [
 // ========================================
 
 function render(){
-
-productGrid.innerHTML =
-products.map((p,i)=>`
-
-<div class="card">
-
-<div class="icon">
-${p[0]}
-</div>
-
-<h3>
-${p[1]}
-</h3>
-
-<div class="price">
-${p[2]}
-</div>
-
-</div>
-
-`).join("");
+ productGrid.innerHTML=products.map((p,i)=>`<div class="card"><div class="icon">${p.icon}</div><h3>${p.name}</h3><div class="price">${p.price}</div></div>`).join("");
+ adminGrid.innerHTML=products.map((p,i)=>`<div><label>${p.name}</label><input id="price${i}" value="${p.price}"><button class="btn secondary" style="margin-top:5px" onclick="removeProduct(${i})">Remove</button></div>`).join("");
 
 
-adminGrid.innerHTML =
-products.map((p,i)=>`
-
-<div>
-
-<label>
-${p[1]}
-</label>
-
-<input
-id="price${i}"
-value="${p[2]}">
-
-<button
-class="btn secondary"
-style="margin-top:5px"
-onclick="removeProduct(${i})">
-
-Remove
-
-</button>
-
-</div>
-
-`).join("");
 
 
 document.getElementById(
