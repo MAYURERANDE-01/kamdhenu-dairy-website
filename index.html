@@ -150,7 +150,7 @@ async function loadData(){
     .eq("id",1)
     .maybeSingle();
 
-  if(si) shopInfo=si;
+  if(si)shopInfo={...shopInfo,...si};
 
   render();
 }
