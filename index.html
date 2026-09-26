@@ -115,8 +115,7 @@ function render(){
     </div>
   `).join("");
 
-  document.getElementById("publicAddress").innerHTML=shopInfo.address;
-  document.getElementById("publicPhone").textContent=shopInfo.phone;
+ document.getElementById("publicAddress").innerHTML=shopInfo.address||"In Front Of Arihant Loh Bhandar, Takali Pra Cha, Chalisgaon - 424101";document.getElementById("publicPhone").textContent=shopInfo.phone||"7588007065";
 
   document.getElementById("callLink").href=
     "tel:"+shopInfo.phone.replace(/[^0-9+]/g,"");
