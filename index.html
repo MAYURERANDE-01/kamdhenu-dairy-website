@@ -150,7 +150,7 @@ async function loadData(){
     .eq("id",1)
     .maybeSingle();
 
-  if(si)shopInfo={...shopInfo,...si};
+  if(si)shopInfo={...shopInfo,address:si.address?.trim()||shopInfo.address,phone:si.phone?.trim()||shopInfo.phone,whatsapp:si.whatsapp?.trim()||shopInfo.whatsapp};
 
   render();
 }
